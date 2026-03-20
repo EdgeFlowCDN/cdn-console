@@ -2,6 +2,8 @@ import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate, Link, useNavigate } from 'react-router-dom';
 import { Layout, Menu, Button } from 'antd';
 import {
+  DashboardOutlined,
+  FileSearchOutlined,
   GlobalOutlined,
   CloudServerOutlined,
   SafetyCertificateOutlined,
@@ -9,6 +11,8 @@ import {
   LogoutOutlined,
 } from '@ant-design/icons';
 import LoginPage from './pages/LoginPage';
+import DashboardPage from './pages/DashboardPage';
+import LogsPage from './pages/LogsPage';
 import DomainsPage from './pages/DomainsPage';
 import DomainDetailPage from './pages/DomainDetailPage';
 import NodesPage from './pages/NodesPage';
@@ -32,10 +36,12 @@ const AppLayout: React.FC = () => {
   };
 
   const menuItems = [
+    { key: '/dashboard', icon: <DashboardOutlined />, label: <Link to="/dashboard">Dashboard</Link> },
     { key: '/domains', icon: <GlobalOutlined />, label: <Link to="/domains">Domains</Link> },
     { key: '/nodes', icon: <CloudServerOutlined />, label: <Link to="/nodes">Nodes</Link> },
     { key: '/certs', icon: <SafetyCertificateOutlined />, label: <Link to="/certs">Certificates</Link> },
     { key: '/purge', icon: <ClearOutlined />, label: <Link to="/purge">Cache Purge</Link> },
+    { key: '/logs', icon: <FileSearchOutlined />, label: <Link to="/logs">Logs</Link> },
   ];
 
   return (
@@ -44,7 +50,7 @@ const AppLayout: React.FC = () => {
         <div style={{ height: 32, margin: 16, color: '#fff', fontSize: 18, fontWeight: 'bold', textAlign: 'center' }}>
           EdgeFlow
         </div>
-        <Menu theme="dark" mode="inline" items={menuItems} defaultSelectedKeys={['/domains']} />
+        <Menu theme="dark" mode="inline" items={menuItems} defaultSelectedKeys={['/dashboard']} />
       </Sider>
       <Layout>
         <Header style={{ background: '#fff', padding: '0 24px', display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
@@ -52,12 +58,14 @@ const AppLayout: React.FC = () => {
         </Header>
         <Content style={{ margin: 24, padding: 24, background: '#fff', minHeight: 280 }}>
           <Routes>
+            <Route path="/dashboard" element={<DashboardPage />} />
             <Route path="/domains" element={<DomainsPage />} />
             <Route path="/domains/:id" element={<DomainDetailPage />} />
             <Route path="/nodes" element={<NodesPage />} />
             <Route path="/certs" element={<CertsPage />} />
             <Route path="/purge" element={<PurgePage />} />
-            <Route path="/" element={<Navigate to="/domains" replace />} />
+            <Route path="/logs" element={<LogsPage />} />
+            <Route path="/" element={<Navigate to="/dashboard" replace />} />
           </Routes>
         </Content>
       </Layout>
