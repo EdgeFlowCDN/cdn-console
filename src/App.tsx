@@ -8,6 +8,7 @@ import {
   CloudServerOutlined,
   SafetyCertificateOutlined,
   ClearOutlined,
+  LockOutlined,
   LogoutOutlined,
 } from '@ant-design/icons';
 import LoginPage from './pages/LoginPage';
@@ -18,6 +19,7 @@ import DomainDetailPage from './pages/DomainDetailPage';
 import NodesPage from './pages/NodesPage';
 import PurgePage from './pages/PurgePage';
 import CertsPage from './pages/CertsPage';
+import SecurityPage from './pages/SecurityPage';
 
 const { Header, Sider, Content } = Layout;
 
@@ -41,6 +43,7 @@ const AppLayout: React.FC = () => {
     { key: '/nodes', icon: <CloudServerOutlined />, label: <Link to="/nodes">Nodes</Link> },
     { key: '/certs', icon: <SafetyCertificateOutlined />, label: <Link to="/certs">Certificates</Link> },
     { key: '/purge', icon: <ClearOutlined />, label: <Link to="/purge">Cache Purge</Link> },
+    { key: '/security', icon: <LockOutlined />, label: <Link to="/security">Security</Link> },
     { key: '/logs', icon: <FileSearchOutlined />, label: <Link to="/logs">Logs</Link> },
   ];
 
@@ -64,6 +67,7 @@ const AppLayout: React.FC = () => {
             <Route path="/nodes" element={<NodesPage />} />
             <Route path="/certs" element={<CertsPage />} />
             <Route path="/purge" element={<PurgePage />} />
+            <Route path="/security" element={<SecurityPage />} />
             <Route path="/logs" element={<LogsPage />} />
             <Route path="/" element={<Navigate to="/dashboard" replace />} />
           </Routes>

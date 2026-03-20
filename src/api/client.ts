@@ -29,8 +29,15 @@ client.interceptors.response.use(
 export default client;
 
 // Auth
-export const login = (username: string, password: string) =>
-  client.post('/auth/login', { username, password });
+export const login = (username: string, password: string, totpCode?: string) =>
+  client.post('/auth/login', { username, password, totp_code: totpCode || '' });
+
+// 2FA
+export const setup2FA = () => client.post('/users/me/2fa/setup');
+export const verify2FA = (code: string) => client.post('/users/me/2fa/verify', { code });
+export const disable2FA = (code: string, password: string) =>
+  client.post('/users/me/2fa/disable', { code, password });
+export const get2FAStatus = () => client.get('/users/me/2fa/status');
 
 // Domains
 export const getDomains = () => client.get('/domains');
